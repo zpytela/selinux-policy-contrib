@@ -26,6 +26,13 @@ gen_tunable(tomcat_use_execmem, false)
 ## </desc>
 gen_tunable(tomcat_can_network_connect_db, false)
 
+## <desc>
+## <p>
+## Allow tomcat to send mail
+## </p>
+## </desc>
+gen_tunable(tomcat_can_sendmail, false)
+
 attribute tomcat_domain;
 
 tomcat_domain_template(tomcat)
@@ -156,6 +163,10 @@ tunable_policy(`tomcat_can_network_connect_db',`
     corenet_tcp_connect_postgresql_port(tomcat_domain)
     corenet_tcp_connect_mysqld_port(tomcat_domain)
     corenet_tcp_connect_redis_port(tomcat_domain)
+')
+
+tunable_policy(`tomcat_can_sendmail',`
+	corenet_tcp_connect_smtp_port(tomcat_t)
 ')
 
 tunable_policy(`tomcat_use_execmem',`
